@@ -62,7 +62,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="#" class="nav-link ">
+            <a href="{{ route('news.index') }}" class="nav-link ">
               <p>
                 News
               </p>
@@ -86,13 +86,6 @@
             <a href="{{ route('aboutUs.index')}}" class="nav-link">
               <p>
                 About_us
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <p>
-                Logout
               </p>
             </a>
           </li>
