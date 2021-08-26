@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('layouts.admin');
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -53,9 +52,24 @@ Route::group([
         Route::post('{aboutUs}', ['as' => "update", "uses" => 'AboutUsController@update']);
         Route::get('{aboutUs}', ['as' => "destroy", "uses" => 'AboutUsController@destroy']);
     });
+
+    Route::group(['prefix' => '/news', 'as' => 'news.'], function() {
+        Route::get('', ['as' => 'index', "uses" => 'NewsController@index']);
+        Route::get('create', ['as' => "create", "uses" => 'NewsController@create']);
+        Route::post('store', ['as' => "store", "uses" => 'NewsController@store']);
+        Route::get('{news}/edit', ['as' => "edit", "uses" => 'NewsController@edit']);
+        Route::post('{news}', ['as' => "update", "uses" => 'NewsController@update']);
+        Route::get('{news}', ['as' => "destroy", "uses" => 'NewsController@destroy']);
+    });
 });
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::group(['middleware' => ['role:admin']], function(){
+//     Route::get('/', function () {
+//         return view('layouts.admin');
+//     });
+// });

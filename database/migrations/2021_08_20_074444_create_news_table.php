@@ -19,7 +19,7 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->text('text');
             $table->string('media');
-            $table->integer('UserId');
+            $table->integer('UserId')->nullable();
             $table->integer('CategoryId');
             $table->timestamp(BaseModel::CREATED_AT)->nullable();
             $table->timestamp(BaseModel::UPDATED_AT)->nullable();
