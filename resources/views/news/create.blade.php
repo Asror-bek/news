@@ -38,6 +38,14 @@
             </select>
         </div>
         <div class="form-group">
+            <label>Теги</label>
+            <select class="select2" name="TagId[]" multiple="multiple" data-placeholder="Выбирите теги" style="width: 100%;">
+                @foreach ($tags as $tag )
+                    <option value="{{ $tag->id}}">{{ $tag->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="image" class="control-label"> </label>
                 <input type="file" name="media" id="media" class="dropify"
                        data-allowed-file-extensions="jpg jpeg png mp4"/>
@@ -45,5 +53,6 @@
         <div class="form-group">
             <input type="submit" class="btn btn-success">
         </div>
+
 
 @endsection
