@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AboutUsRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,8 @@ class AboutUsRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'media' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'text' => 'required|string|max:500'
+            'name' => 'required|string',
         ];
     }
 }

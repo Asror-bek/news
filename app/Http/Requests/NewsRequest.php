@@ -26,9 +26,11 @@ class NewsRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'text' => 'required|string|max:500',
-            'media' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'CategoryId' => 'required|integer|',
-            'UserId' => 'integer'
+            'media' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'CategoryId' => 'integer',
+            'UserId' => 'integer',
+            'TagId'  => "nullable|array",
+            "TagId.*"    => "nullable|integer|exists:tags,id",
         ];
     }
 }

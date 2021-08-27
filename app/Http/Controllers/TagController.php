@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NewsRequest;
-use App\Models\Category;
-use App\Models\News;
+use App\Services\TagService;
 use App\Models\Tags;
-use Illuminate\Http\Request;
-use App\Services\NewsService;
+use App\Http\Requests\TagRequest;
 
-class NewsController extends Controller
+class TagController extends Controller
 {
 
-    private $newsService;
+    private $tagService;
 
-    public function __construct(NewsService $newsService)
+
+    public function __construct(TagService $tagService)
     {
-        $this->newsService = $newsService;
+        $this->tagService = $tagService;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,9 +23,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = $this->newsService->fetchAllWithPaginate();
-        return view('news.index',[
-            'news' => $news
+        $tag = $this->tagService->fetchAllWithPaginate();
+        return view("tags.index",[
+            'tags' => $tag
         ]);
     }
 
@@ -39,8 +36,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news.create',[
-            'category' => Category::query()->get(),
+        return view('tags.create', [
             'tags' => Tags::query()->get()
         ]);
     }
@@ -51,10 +47,10 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewsRequest $request)
+    public function store(TagRequest $request)
     {
-        $this->newsService->createNews($request->validated());
-        return redirect()->route('news.index');
+        $this->tagService->createNewTag($request->validated());
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -63,9 +59,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+
     }
 
     /**
@@ -74,12 +70,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(Tags $tags)
     {
-        return view('news.edit', [
-            'news' => $news,
-            'category' => Category::query()->get(),
-            'tags' => Tags::query()->get()
+        return view('tags.edit', [
+            'tags' => $tags
         ]);
     }
 
@@ -90,10 +84,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request, News $news)
+    public function update(TagRequest $request, Tags $tags)
     {
-        $this->newsService->updateExistingNews($request->validated(), $news);
-        return redirect()->route('news.index');
+        $this->tagService->updateExistingTag($request->validated(), $tags);
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -102,9 +96,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Tags $tag)
     {
-        $this->newsService->deleteNews($news);
-        return redirect()->route('news.index');
+        $this->tagService->deleteTag($tag);
+        return redirect()->route('tags.index');
     }
 }

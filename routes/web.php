@@ -61,6 +61,15 @@ Route::group([
         Route::post('{news}', ['as' => "update", "uses" => 'NewsController@update']);
         Route::get('{news}', ['as' => "destroy", "uses" => 'NewsController@destroy']);
     });
+
+    Route::group(['prefix' => '/tags', 'as' => 'tags.'], function() {
+        Route::get('', ['as' => 'index', "uses" => 'TagController@index']);
+        Route::get('create', ['as' => "create", "uses" => 'TagController@create']);
+        Route::post('store', ['as' => "store", "uses" => 'TagController@store']);
+        Route::get('{tags}/edit', ['as' => "edit", "uses" => 'TagController@edit']);
+        Route::post('{tags}', ['as' => "update", "uses" => 'TagController@update']);
+        Route::get('{tags}', ['as' => "destroy", "uses" => 'TagController@destroy']);
+    });
 });
 
 

@@ -19,4 +19,9 @@ class News extends BaseModel
     {
         return $this->hasOne(User::class, 'id', 'UserId');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class, "news_tags", "NewsId", "TagId");
+    }
 }
