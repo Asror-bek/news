@@ -19,7 +19,7 @@ class CreateFeedbackTable extends Migration
             $table->text('text');
             $table->string('email');
             $table->string('title');
-            $table->integer('UserId');
+            $table->integer('UserId')->nullable();
             $table->timestamp(BaseModel::CREATED_AT)->nullable();
             $table->timestamp(BaseModel::UPDATED_AT)->nullable();
         });

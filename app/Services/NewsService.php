@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\News;
-use App\Models\Tags;
 use App\Models\NewsTags;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedFile;

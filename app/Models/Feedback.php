@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends BaseModel
 {
     use HasFactory;
+
+    public $fillable = ['text', 'email', 'title', 'UserId'];
 }
