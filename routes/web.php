@@ -70,6 +70,22 @@ Route::group([
         Route::post('{tags}', ['as' => "update", "uses" => 'TagController@update']);
         Route::get('{tags}', ['as' => "destroy", "uses" => 'TagController@destroy']);
     });
+
+    Route::group(['prefix' => '/comment', 'as' => 'comment.'], function() {
+        Route::get('', ['as' => 'index', "uses" => 'CommentController@index']);
+        Route::get('create', ['as' => "create", "uses" => 'CommentController@create']);
+        Route::post('store', ['as' => "store", "uses" => 'CommentController@store']);
+        Route::get('{comment}/edit', ['as' => "edit", "uses" => 'CommentController@edit']);
+        Route::post('{comment}', ['as' => "update", "uses" => 'CommentController@update']);
+        Route::get('{comment}', ['as' => "destroy", "uses" => 'CommentController@destroy']);
+    });
+
+    Route::group(['prefix' => '/feedback', 'as' => 'feedback.'], function() {
+        Route::get('',['as' => 'getFeedBack', "uses" => 'FeedBackController@getFeedBack'] );
+        Route::post('saveFeedBack', ['as' => 'saveContact', 'uses' => 'FeedBackController@saveFeedBack']);
+    });
+
+
 });
 
 

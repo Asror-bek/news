@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NewsRequest;
-use App\Models\Category;
+use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 use App\Models\News;
-use App\Models\Tags;
-use App\Services\NewsService;
+use App\Services\CommentService;
 
-class NewsController extends Controller
+class CommentController extends Controller
 {
 
-    private $newsService;
+    private $commentService;
 
-    public function __construct(NewsService $newsService)
+
+    public function __construct(CommentService $commentService)
     {
-        $this->newsService = $newsService;
+        $this->commentService = $commentService;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +24,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = $this->newsService->fetchAllWithPaginate();
-        return view('news.index',[
-            'news' => $news
+        $comment = $this->commentService->fetchAllWithPaginate();
+        return view('comment.index',[
+            'comment' => $comment
         ]);
     }
 
@@ -38,9 +37,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news.create',[
-            'category' => Category::query()->get(),
-            'tags' => Tags::query()->get()
+        return view('comment.create',[
+            'comment' => Comment::query()->get(),
+            'news' => News::query()->get()
         ]);
     }
 
@@ -50,10 +49,10 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewsRequest $request)
+    public function store(CommentRequest $request)
     {
-        $this->newsService->createNews($request->validated());
-        return redirect()->route('news.index');
+        $this->commentService->createNewComment($request->validated());
+        return redirect()->route('comment.index');
     }
 
     /**
@@ -73,12 +72,11 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(Comment $comment)
     {
-        return view('news.edit', [
-            'news' => $news,
-            'category' => Category::query()->get(),
-            'tags' => Tags::query()->get()
+        return view('comment.edit', [
+            'comment' => $comment,
+            'news' => News::query()->get()
         ]);
     }
 
@@ -89,10 +87,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request, News $news)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        $this->newsService->updateExistingNews($request->validated(), $news);
-        return redirect()->route('news.index');
+        $this->commentService->updateExistingComment($request->validated(), $comment);
+        return redirect()->route('comment.index');
     }
 
     /**
@@ -101,9 +99,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Comment $comment)
     {
-        $this->newsService->deleteNews($news);
-        return redirect()->route('news.index');
+        $this->commentService->deleteComment($comment);
+        return redirect()->route('comment.index');
     }
 }

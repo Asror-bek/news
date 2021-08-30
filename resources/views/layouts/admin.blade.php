@@ -99,6 +99,20 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('comment.index')}}" class="nav-link">
+              <p>
+                Comment
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('feedback.getFeedBack')}}" class="nav-link">
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
