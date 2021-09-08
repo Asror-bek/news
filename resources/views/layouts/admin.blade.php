@@ -65,51 +65,37 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="{{ route('news.index') }}" class="nav-link ">
+            <a href="{{ route('admin.news.index') }}" class="nav-link ">
               <p>
                 News
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route("category.index")}}" class="nav-link">
+            <a href="{{ route("admin.category.index")}}" class="nav-link">
               <p>
                 Category
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('contact.index')}}" class="nav-link">
+            <a href="{{ route('admin.contact.index')}}" class="nav-link">
               <p>
                 Contacts
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('aboutUs.index')}}" class="nav-link">
+            <a href="{{ route('admin.aboutUs.index')}}" class="nav-link">
               <p>
                 About_us
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('tags.index')}}" class="nav-link">
+            <a href="{{ route('admin.tags.index')}}" class="nav-link">
               <p>
                 Tags
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('comment.index')}}" class="nav-link">
-              <p>
-                Comment
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('feedback.getFeedBack')}}" class="nav-link">
-              <p>
-                Feedback
               </p>
             </a>
           </li>

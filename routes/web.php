@@ -17,15 +17,21 @@ Route::get('/', function () {
     return view('layouts.admin');
 });
 
+Route::get('/frontend', function () {
+    return view('layouts.frontend');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/index', function () {
+//     return view('user.index');
+// });
 
 Route::group([
     'namespace' => 'App\Http\\Controllers'
 ], function(){
     Route::group([
-        'prefix' => '/category',
-        'as' => 'category.'
+        'prefix' => '/admin/category',
+        'as' => 'admin.category.',
+        'namespace' => 'Admin'
     ], function() {
         Route::get('', ['as' => "index", "uses" => 'CategoryController@index']);
         Route::get('create', ['as' => "create", "uses" => 'CategoryController@create']);
@@ -35,7 +41,7 @@ Route::group([
         Route::get('{category}', ['as' => "destroy", "uses" => 'CategoryController@destroy']);
     });
 
-    Route::group(['prefix' => '/contact', 'as' => 'contact.'], function() {
+    Route::group(['prefix' => '/admin/contact', 'as' => 'admin.contact.', 'namespace' => 'Admin'], function() {
         Route::get('', ['as' => "index", "uses" => 'ContactController@index']);
         Route::get('create', ['as' => "create", "uses" => 'ContactController@create']);
         Route::post('store', ['as' => "store", "uses" => 'ContactController@store']);
@@ -44,7 +50,7 @@ Route::group([
         Route::get('{contact}', ['as' => "destroy", "uses" => 'ContactController@destroy']);
     });
 
-    Route::group(['prefix' => '/aboutUs', 'as' => 'aboutUs.'], function() {
+    Route::group(['prefix' => '/admin/aboutUs', 'as' => 'admin.aboutUs.', 'namespace' => 'Admin'], function() {
         Route::get('', ['as' => 'index', "uses" => 'AboutUsController@index']);
         Route::get('create', ['as' => "create", "uses" => 'AboutUsController@create']);
         Route::post('store', ['as' => "store", "uses" => 'AboutUsController@store']);
@@ -53,7 +59,7 @@ Route::group([
         Route::get('{aboutUs}', ['as' => "destroy", "uses" => 'AboutUsController@destroy']);
     });
 
-    Route::group(['prefix' => '/news', 'as' => 'news.'], function() {
+    Route::group(['prefix' => '/admin/news', 'as' => 'admin.news.', 'namespace' => 'Admin'], function() {
         Route::get('', ['as' => 'index', "uses" => 'NewsController@index']);
         Route::get('create', ['as' => "create", "uses" => 'NewsController@create']);
         Route::post('store', ['as' => "store", "uses" => 'NewsController@store']);
@@ -62,7 +68,7 @@ Route::group([
         Route::get('{news}', ['as' => "destroy", "uses" => 'NewsController@destroy']);
     });
 
-    Route::group(['prefix' => '/tags', 'as' => 'tags.'], function() {
+    Route::group(['prefix' => '/admin/tags', 'as' => 'admin.tags.', 'namespace' => 'Admin'], function() {
         Route::get('', ['as' => 'index', "uses" => 'TagController@index']);
         Route::get('create', ['as' => "create", "uses" => 'TagController@create']);
         Route::post('store', ['as' => "store", "uses" => 'TagController@store']);
@@ -71,7 +77,7 @@ Route::group([
         Route::get('{tags}', ['as' => "destroy", "uses" => 'TagController@destroy']);
     });
 
-    Route::group(['prefix' => '/comment', 'as' => 'comment.'], function() {
+    Route::group(['prefix' => '/admin/comment', 'as' => 'admin.comment.', 'namespace' => 'Admin'], function() {
         Route::get('', ['as' => 'index', "uses" => 'CommentController@index']);
         Route::get('create', ['as' => "create", "uses" => 'CommentController@create']);
         Route::post('store', ['as' => "store", "uses" => 'CommentController@store']);
@@ -80,16 +86,43 @@ Route::group([
         Route::get('{comment}', ['as' => "destroy", "uses" => 'CommentController@destroy']);
     });
 
-    Route::group(['prefix' => '/feedback', 'as' => 'feedback.'], function() {
+    Route::group(['prefix' => '/user/feedback', 'as' => 'user.feedback.', 'namespace' => 'Frontend'], function() {
         Route::get('',['as' => 'getFeedBack', "uses" => 'FeedBackController@getFeedBack'] );
-        Route::post('saveFeedBack', ['as' => 'saveContact', 'uses' => 'FeedBackController@saveFeedBack']);
+        Route::post('saveFeedBack', ['as' => 'saveFeedBack', 'uses' => 'FeedBackController@saveFeedBack']);
     });
+
+    Route::group([
+        'prefix' => '/frontend/index',
+        'as' => 'frontend.index.',
+        'namespace' => 'Frontend'
+    ], function(){
+        Route::get('', ['as' => 'index', 'uses' => 'NewsController@index']);
+    });
+
+    Route::group([
+        'prefix' => '/frontend/contact',
+        'as' => 'frontend.contact.',
+        'namespace' => 'Frontend'
+    ], function(){
+        Route::get('', ['as' => 'index', 'uses' => 'ContactController@index']);
+    });
+
+    Route::group([
+        'prefix' => '/frontend/aboutUs',
+        'as' => 'frontend.aboutUs.',
+        'namespace' => 'Frontend'
+    ], function(){
+        Route::get('', ['as' => 'index', 'uses' => 'AboutUsController@index']);
+    });
+
+
+
 
 
 });
 
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
