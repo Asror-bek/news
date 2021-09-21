@@ -3,20 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Admin\TagService;
-use App\Models\Tags;
-use App\Http\Requests\TagRequest;
+use Illuminate\Http\Request;
+use App\Models\Feedback;
 
-class TagController extends Controller
+class FeedBackController extends Controller
 {
-
-    private $tagService;
-
-
-    public function __construct(TagService $tagService)
-    {
-        $this->tagService = $tagService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +15,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tag = $this->tagService->fetchAllWithPaginate();
-        return view("admin.tags.index",[
-            'tags' => $tag
+        
+        $feedback = Feedback::query()->get();
+        return view('admin.feedback.index',[
+            'feedback' => $feedback
         ]);
     }
 
@@ -37,9 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create', [
-            'tags' => Tags::query()->get()
-        ]);
+        //
     }
 
     /**
@@ -48,10 +38,9 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TagRequest $request)
+    public function store(Request $request)
     {
-        $this->tagService->createNewTag($request->validated());
-        return redirect()->route('admin.tags.index');
+        //
     }
 
     /**
@@ -60,9 +49,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-
+        //
     }
 
     /**
@@ -71,11 +60,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tags $tags)
+    public function edit($id)
     {
-        return view('admin.tags.edit', [
-            'tags' => $tags
-        ]);
+        //
     }
 
     /**
@@ -85,10 +72,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TagRequest $request, Tags $tags)
+    public function update(Request $request, $id)
     {
-        $this->tagService->updateExistingTag($request->validated(), $tags);
-        return redirect()->route('admin.tags.index');
+        //
     }
 
     /**
@@ -97,9 +83,8 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tags $tag)
+    public function destroy($id)
     {
-        $this->tagService->deleteTag($tag);
-        return redirect()->route('admin.tags.index');
+        //
     }
 }

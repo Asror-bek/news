@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="{{asset('adminlte/adminlte/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('adminlte/adminlte/plugins/summernote/summernote-bs4.min.css')}}">
+  @yield('header_styles')
+
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -79,23 +82,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin.contact.index')}}" class="nav-link">
+            <a href="{{ route("admin.feedback.index")}}" class="nav-link">
               <p>
-                Contacts
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('admin.aboutUs.index')}}" class="nav-link">
-              <p>
-                About_us
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('admin.tags.index')}}" class="nav-link">
-              <p>
-                Tags
+                FeedBack
               </p>
             </a>
           </li>
@@ -137,6 +126,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{asset('adminlte/adminlte/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('adminlte/adminlte/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -171,8 +161,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('adminlte/adminlte/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('adminlte/adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
-<script>
-    $('.select2').select2()
-</script>
+@yield('footer-scripts')
+
 </body>
 </html>

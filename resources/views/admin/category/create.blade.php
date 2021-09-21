@@ -10,7 +10,7 @@
                 <span class="input-group-text border-right-0 rounded-0">
                     <i class="fa fa-fw fa-file-text-o"></i>
                 </span>
-                <input type="text" class="form-control" name="name" id="name" value="{{old("name")}}" placeholder="{{__("Название категории")}}">
+                <input type="text" class="form-control" name="Name" id="Name" value="{{old("Name")}}" placeholder="{{__("Название категории")}}">
             </div>
         </div>
         <div class="form-group">
@@ -19,7 +19,7 @@
                 <span class="input-group-text border-right-0 rounded-0">
                     <i class="fa fa-fw fa-file-text-o"></i>
                 </span>
-                <input type="text" class="form-control" name="description" id="description" value="{{old("description")}}" placeholder="{{__("Описание категории")}}">
+                <input type="text" class="form-control" name="Description" id="Description" value="{{old("Description")}}" placeholder="{{__("Описание категории")}}">
             </div>
         </div>
         <div class="form-group">

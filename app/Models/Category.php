@@ -11,6 +11,6 @@ class Category extends BaseModel
 
     public function news()
     {
-        return $this->hasOne(News::class, "CategoryId", "id");
+        return $this->hasMany(News::class, "CategoryId", "id");
     }
 }

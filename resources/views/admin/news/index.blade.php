@@ -25,9 +25,9 @@
                             @foreach ($news as $val)
                             <tr>
                                 <td>{{ $val->id }}</td>
-                                <td>{{ $val->title }}</td>
-                                <td>{{ $val->text }}</td>
-                                <td>{{ $val->category->name }}</td>
+                                <td>{{ $val->Title }}</td>
+                                <td>{{ $val->Text }}</td>
+                                <td>{{ $val->category->Name }}</td>
                                 <th>
                                     <a href="{{route('admin.news.edit', $val->id)}}"><i class="fas fa-edit"></i></a>
                                     <a href="{{route('admin.news.destroy', $val->id)}}"><i class="fas fa-trash-alt"></i></a>

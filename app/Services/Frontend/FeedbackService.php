@@ -14,9 +14,9 @@ class FeedBackService
     public function createNewFeedback(array $validated)
     {
         $feedback = new Feedback();
-        $feedback->text  = $validated['text'];
-        $feedback->email = $validated['email'];
-        $feedback->title = $validated['title'];
+        $feedback->Text  = $validated['Text'];
+        $feedback->Email = $validated['Email'];
+        $feedback->Title = $validated['Title'];
         $feedback->UserId = Auth::id();
         $feedback->save();
         return $feedback;

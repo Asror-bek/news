@@ -23,8 +23,8 @@
                             @foreach ($category as $val)
                             <tr>
                                 <td>{{ $val->id }}</td>
-                                <td>{{ $val->name }}</td>
-                                <td>{{ $val->description }}</td>
+                                <td>{{ $val->Name }}</td>
+                                <td>{{ $val->Description }}</td>
                                 <th>
                                     <a href="{{route('admin.category.edit', $val->id)}}"><i class="fas fa-edit"></i></a>
                                     <a href="{{route('admin.category.destroy', $val->id)}}"><i class="fas fa-trash-alt"></i></a>

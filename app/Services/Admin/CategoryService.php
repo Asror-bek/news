@@ -14,16 +14,16 @@ class CategoryService
     public function createNewCategory(array $validated)
     {
         $category = new Category();
-        $category->name = $validated['name'];
-        $category->description = $validated['description'];
+        $category->Name = $validated['Name'];
+        $category->Description = $validated['Description'];
         $category->save();
         return $category;
     }
 
     public function updateExistingCategory(array $validated, Category $category)
     {
-        $category->name = $validated['name'];
-        $category->description = $validated['description'];
+        $category->Name = $validated['Name'];
+        $category->Description = $validated['Description'];
         $category->save();
         return $category;
     }

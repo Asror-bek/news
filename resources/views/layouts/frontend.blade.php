@@ -13,7 +13,9 @@
 
 
     <!-- Bootstrap core CSS -->
-<link href="{{asset('user/assets/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('user/assets/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    @yield('header_styles')
+
 
     <style>
       .bd-placeholder-img {
@@ -29,6 +31,31 @@
           font-size: 3.5rem;
         }
       }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover {
+        background-color: #111;
+        }
+
     </style>
 
 
@@ -44,11 +71,30 @@
           <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
           <ul class="list-unstyled">
+            <li><a href="{{ route('frontend.news.index')}}" class="text-white">News</a></li>
             <li><a href="{{ route('frontend.contact.index')}}" class="text-white">Contact</a></li>
-            <li><a href="{{ route('frontend.aboutUs.index')}}" class="text-white">About us</a></li>
             <li><a href="{{ route('user.feedback.getFeedBack')}}" class="text-white">FeedBack</a></li>
+            @guest
+            <li>
+                <a href="{{ route('login')}}" class="text-white">Login</a>
+            </li>
+            @else
+            <li>
+                <a class="text-white" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
+            @endguest
+
+            <li><a href="{{ route('register')}}" class="text-white">Register</a></li>
+            {{-- <li><a href="{{ route('logout')}}" class="text-white">Logout</a></li> --}}
           </ul>
         </div>
       </div>
@@ -66,10 +112,9 @@
     </div>
   </div>
 </header>
-
+@yield('navbar')
   <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           @yield('content')
       </div>
@@ -79,6 +124,7 @@
 
 
     <script src="{{asset('user/assets/dist/js/bootstrap.bundle.min.js')}}"></script>
+    @yield('footer-scripts')
 
 
   </body>

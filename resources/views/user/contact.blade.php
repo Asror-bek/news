@@ -1,13 +1,6 @@
 @extends('layouts.frontend')
 
 @section('content')
-    {{-- <div class="container">
-        @foreach ($contact as $val)
-            <p>{{ $val->phone }}</p>
-            <p>{{ $val->address }}</p>
-            <p>{{ $val->email }}</p>
-        @endforeach
-    </div> --}}
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -38,7 +31,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fas fa-address-card"></i></div>
                                         </div>
-                                        <input type="text" class="form-control" value="{{ $val->address }}"  >
+                                        <input type="text" class="form-control" value="{{ $val->Address }}"  >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -46,7 +39,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fas fa-envelope-square"></i></div>
                                         </div>
-                                        <input type="email" class="form-control" value="{{ $val->email }}" >
+                                        <input type="email" class="form-control" value="{{ $val->Email }}" >
                                     </div>
                                 </div>
 
@@ -55,7 +48,15 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fas fa-phone"></i></div>
                                         </div>
-                                        <input  class="form-control" value="{{ $val->phone }}" >
+                                        <input  class="form-control" value="{{ $val->Phone }}" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-text-width"></i></div>
+                                        </div>
+                                        <input  class="form-control" value="{{ $val->Text }}" >
                                     </div>
                                 </div>
                                 @endforeach

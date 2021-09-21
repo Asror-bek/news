@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 use App\Services\Frontend\FrontendService;
 
@@ -23,9 +25,11 @@ class NewsController extends Controller
     public function index()
     {
         $news = $this->frontendService->fetchAllWithPaginate();
+        $categories = $this->frontendService->index();
 
         return view('user.index',[
-            'news' => $news
+            'news' => $news,
+            'categories' => $categories
         ]);
     }
 
@@ -58,7 +62,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
