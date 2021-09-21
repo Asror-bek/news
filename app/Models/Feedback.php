@@ -9,5 +9,5 @@ class Feedback extends BaseModel
 {
     use HasFactory;
 
-    public $fillable = ['text', 'email', 'title', 'UserId'];
+    public $fillable = ['Text', 'Email', 'Title', 'UserId'];
 }

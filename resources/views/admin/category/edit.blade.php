@@ -22,7 +22,7 @@
                                 <span class="input-group-text border-right-0 rounded-0">
                                     <i class="fa fa-fw fa-file-text-o"></i>
                                 </span>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="{{__("Название категории ")}}" value="{{$category->name}}">
+                                <input type="text" class="form-control" name="Name" id="Name" placeholder="{{__("Название категории ")}}" value="{{$category->Name}}">
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                                 <span class="input-group-text border-right-0 rounded-0">
                                     <i class="fa fa-fw fa-file-text-o"></i>
                                 </span>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="{{__("Описание категории ")}}" value="{{$category->description}}">
+                                <input type="text" class="form-control" name="Description" id="Description" placeholder="{{__("Описание категории ")}}" value="{{$category->Description}}">
                             </div>
                         </div>
                     </div>

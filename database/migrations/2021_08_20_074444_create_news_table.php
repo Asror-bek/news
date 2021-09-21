@@ -16,11 +16,11 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('text');
-            $table->string('media');
+            $table->string('Title')->nullable();
+            $table->text('Text')->nullable();
+            $table->string('Media')->nullable();
             $table->integer('UserId')->nullable();
-            $table->integer('CategoryId');
+            $table->integer('CategoryId')->nullable();
             $table->timestamp(BaseModel::CREATED_AT)->nullable();
             $table->timestamp(BaseModel::UPDATED_AT)->nullable();
         });

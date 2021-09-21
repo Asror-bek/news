@@ -5,18 +5,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\News;
 use App\Models\Tags;
+use App\Services\Admin\CommentService;
 use App\Services\Admin\NewsService;
 
 class NewsController extends Controller
 {
 
     private $newsService;
+    private $commentService;
 
-    public function __construct(NewsService $newsService)
+    public function __construct(NewsService $newsService, CommentService $commentService)
     {
         $this->newsService = $newsService;
+        $this->commentService = $commentService;
     }
 
     /**
@@ -27,6 +31,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = $this->newsService->fetchAllWithPaginate();
+
         return view('admin.news.index',[
             'news' => $news
         ]);
@@ -65,7 +70,12 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+        $news = News::find($id);
+        $comment = $this->commentService->fetchAllWithPaginate($id);
+        return view('admin.news.show', [
+            'news' => $news,
+            'comment' => $comment
+        ]);
     }
 
     /**
@@ -92,6 +102,7 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, News $news)
     {
+
         $this->newsService->updateExistingNews($request->validated(), $news);
         return redirect()->route('admin.news.index');
     }

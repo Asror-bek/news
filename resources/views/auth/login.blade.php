@@ -1,6 +1,11 @@
 @extends('layouts.login')
 
 @section('content')
+@if($errors->any())
+        @foreach($errors->all() as $error)
+        <div class="alert alert-danger">{{$error}}</div>
+        @endforeach
+    @endif
 <br>
 <div class="container">
     <div class="row justify-content-center">
@@ -9,14 +14,14 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" autocomplete="off" >
                         @csrf
 
                         <div class="form-group row">
                             <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Login') }}</label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
+                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login"  required>
 
                                 @error('login')
                                     <span class="invalid-feedback" role="alert">
@@ -30,7 +35,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -53,5 +58,5 @@
         </div>
     </div>
 </div>
-    
+
 @endsection

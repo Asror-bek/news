@@ -16,8 +16,8 @@ class CreateNewsTagsTable extends Migration
     {
         Schema::create('news_tags', function (Blueprint $table) {
             $table->id();
-            $table->integer('NewsId');
-            $table->integer('TagId');
+            $table->integer('NewsId')->nullable();
+            $table->integer('TagId')->nullable();
             $table->timestamp(BaseModel::CREATED_AT)->nullable();
             $table->timestamp(BaseModel::UPDATED_AT)->nullable();
         });

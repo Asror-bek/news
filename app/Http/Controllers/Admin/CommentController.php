@@ -23,9 +23,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $comment = $this->commentService->fetchAllWithPaginate();
+        $comment = $this->commentService->fetchAllWithPaginate($id);
         return view('admin.comment.index',[
             'comment' => $comment
         ]);
@@ -38,10 +38,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('admin.comment.create',[
-            'comment' => Comment::query()->get(),
-            'news' => News::query()->get()
-        ]);
+
     }
 
     /**
@@ -50,10 +47,10 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function store(CommentRequest $request, $newsId)
     {
-        $this->commentService->createNewComment($request->validated());
-        return redirect()->route('admin.comment.index');
+        $this->commentService->createNewComment($request->validated(), $newsId);
+        return redirect()->route('admin.news.show', $newsId);
     }
 
     /**
@@ -96,9 +93,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy()
     {
-        $this->commentService->deleteComment($comment);
-        return redirect()->route('admin.comment.index');
+
     }
 }

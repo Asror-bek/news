@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentService
 {
-    public function fetchAllWithPaginate()
+    public function fetchAllWithPaginate($newsId)
     {
-        return Comment::query()->get();
+        return Comment::query()->where("NewsId", "=", $newsId)->get();
     }
 
-    public function createNewComment(array $validated)
+    public function createNewComment(array $validated, $newsId)
     {
         $comment = new Comment();
-        $comment->text = $validated['text'];
-        $comment->NewsId = $validated['NewsId'];
+        $comment->Text = $validated['Text'];
+        $comment->NewsId = $newsId;
         $comment->UserId = Auth::id();
         $comment->save();
         return $comment;

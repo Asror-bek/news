@@ -24,13 +24,11 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'text' => 'required|string|max:500',
-            'media' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'Title' => 'required|string|max:255',
+            'Text' => 'required|string|max:500',
+            'Media' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'CategoryId' => 'integer',
-            'UserId' => 'integer',
-            'TagId'  => "nullable|array",
-            "TagId.*"    => "nullable|integer|exists:tags,id",
+            'TagId' => "nullable|array"
         ];
     }
 }
