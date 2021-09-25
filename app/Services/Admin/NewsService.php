@@ -21,13 +21,9 @@ class NewsService
     {
 
         $file = $this->saveFile($validated["Media"]);
-        $news = new News();
-        $news->Title = $validated['Title'];
-        $news->Text = $validated['Text'];
-        $news->Media = $file;
-        $news->CategoryId = $validated['CategoryId'];
-        $news->UserId = Auth::id();
-        $news->save();
+        $validated['Media'] = $file;
+        $validated['UserId'] = auth()->id();
+        $news = News::query()->create($validated);
         foreach ($validated["TagId"] as $key => $value) {
             $tag = new Tags();
             $tag->Name = $value;
@@ -43,30 +39,15 @@ class NewsService
 
     public function updateExistingNews(array $validated, News $news)
     {
-
-        $news->Title = $validated['Title'];
-        $news->Text = $validated['Text'];
-        $news->CategoryId = $validated['CategoryId'];
-        $news->UserId = Auth::id();
-
-
-        if($validated['Media'])
-        {
-
-            $destination = 'public/news'. $news->Media;
-            Storage::disk('public')->delete($destination);
-
-            $extension = $validated['Media']->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $mediaFile = $validated['Media'];
-            $mediaFile->storeAs('news', $filename, 'public');
-
-            $news->Media = $filename;
+        if ($validated['Media']) {
+            Storage::disk('public')->delete("news/{$news->Media}");
+            $validated['Media'] = $this->saveFile($validated['Media']);
         }
 
-        $news->save();
+        $news = tap($news)->update($validated);
+
         $modelTags = [];
-        foreach($validated["TagId"] as $tag) {
+        foreach ($validated["TagId"] as $tag) {
             $modelTag = Tags::query()->firstOrCreate([
                 'Name' => $tag
             ]);
@@ -87,9 +68,10 @@ class NewsService
         $news->delete();
     }
 
-    protected function saveFile(UploadedFile $file) {
-        $f_name = "IMG_".date("d-m-Y_H-i-s").".".$file->getClientOriginalExtension();
-        $file->storeAs("public/news", $f_name);
+    protected function saveFile(UploadedFile $file)
+    {
+        $f_name = "IMG_" . date("d-m-Y_H-i-s") . "." . $file->getClientOriginalExtension();
+        $file->storeAs("news", $f_name, 'public');
         return $f_name;
     }
 

@@ -74,7 +74,7 @@
           <ul class="list-unstyled">
             <li><a href="{{ route('frontend.news.index')}}" class="text-white">News</a></li>
             <li><a href="{{ route('frontend.contact.index')}}" class="text-white">Contact</a></li>
-            <li><a href="{{ route('user.feedback.getFeedBack')}}" class="text-white">FeedBack</a></li>
+            <li><a href="{{ route('frontend.user.feedback.getFeedBack')}}" class="text-white">FeedBack</a></li>
             @guest
             <li>
                 <a href="{{ route('login')}}" class="text-white">Login</a>

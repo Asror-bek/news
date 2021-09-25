@@ -49,7 +49,7 @@ class FeedBackController extends Controller
     public function saveFeedBack(FeedbackRequest $request)
     {
         $this->feedbackService->createNewFeedback($request->validated());
-        return redirect()->route('user.feedback.getFeedBack');
+        return redirect()->route('frontend.user.feedback.getFeedBack');
     }
 
     /**

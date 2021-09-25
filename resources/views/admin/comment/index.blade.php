@@ -15,7 +15,7 @@
                         </div>
                         @endif
 
-                    <form method="post" action="{{ route('admin.comment.store')}}">
+                    <form method="post" action="{{ route('admin.comment.store', 1)}}">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-12">
