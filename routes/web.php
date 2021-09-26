@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,22 @@ Route::get('/', function () {
     return view('layouts.frontend');
 });
 
-
-
 Route::group([
-    'namespace' => 'App\Http\\Controllers'
-], function(){
+    'prefix' => 'admin',
+    'as' => 'admin.',
+    'middleware' => ['auth'],
+    'namespace' => 'Admin'
+], function () {
+    Route::get('', function () {
+        return view('layouts.admin');
+    });
+
     Route::group([
-        'prefix' => '/admin/category',
-        'as' => 'admin.category.',
-        'namespace' => 'Admin'
-    ], function() {
-        Route::get('', ['as' => "index", "uses" => 'CategoryController@index']);
+        'prefix' => 'category',
+        'as' => 'category.',
+    ], function () {
+//        Route::get('', ['as' => "index", "uses" => 'CategoryController@index']);
+        Route::get('', [CategoryController::class, 'index'])->name('index');
         Route::get('create', ['as' => "create", "uses" => 'CategoryController@create']);
         Route::post('store', ['as' => "store", "uses" => 'CategoryController@store']);
         Route::get('{category}/edit', ['as' => "edit", "uses" => 'CategoryController@edit']);
@@ -39,7 +45,7 @@ Route::group([
         Route::get('{category}', ['as' => "destroy", "uses" => 'CategoryController@destroy']);
     });
 
-    Route::group(['prefix' => '/admin/news', 'as' => 'admin.news.', 'namespace' => 'Admin'], function() {
+    Route::group(['prefix' => 'news', 'as' => 'news.'], function () {
         Route::get('', ['as' => 'index', "uses" => 'NewsController@index']);
         Route::get('create', ['as' => "create", "uses" => 'NewsController@create']);
         Route::post('store', ['as' => "store", "uses" => 'NewsController@store']);
@@ -49,42 +55,39 @@ Route::group([
         Route::get('{news}', ['as' => "destroy", "uses" => 'NewsController@destroy']);
     });
 
-    Route::group(['prefix' => '/admin/comment', 'as' => 'admin.comment.', 'namespace' => 'Admin'], function() {
-        Route::get('', ['as' => 'index', "uses" => 'CommentController@index']);
+    Route::group(['prefix' => 'comment', 'as' => 'comment.'], function () {
+//        Route::get('{id}', ['as' => 'index', "uses" => 'CommentController@index']);
         Route::post("store/{newsId}", ['as' => "store", "uses" => 'CommentController@store']);
     });
 
+    Route::group(['prefix' => 'feedback', 'as' => 'feedback.'], function () {
+        Route::get('/', ['as' => 'index', 'uses' => 'FeedBackController@index']);
+    });
+});
 
-
-    Route::group(['prefix' => '/user/feedback', 'as' => 'user.feedback.', 'namespace' => 'Frontend'], function() {
-        Route::get('',['as' => 'getFeedBack', "uses" => 'FeedBackController@getFeedBack'] );
+Route::group([
+    'as' => 'frontend.',
+    'namespace' => 'Frontend'
+], function () {
+    Route::group(['prefix' => '/user/feedback', 'as' => 'user.feedback.'], function () {
+        Route::get('', ['as' => 'getFeedBack', "uses" => 'FeedBackController@getFeedBack']);
         Route::post('saveFeedBack', ['as' => 'saveFeedBack', 'uses' => 'FeedBackController@saveFeedBack']);
     });
 
     Route::group([
-        'prefix' => '/frontend/news',
-        'as' => 'frontend.news.',
-        'namespace' => 'Frontend'
-    ], function(){
+        'prefix' => 'news',
+        'as' => 'news.',
+    ], function () {
         Route::get('', ['as' => 'index', 'uses' => 'NewsController@index']);
+        Route::get('show/{news}', ['as' => 'show', 'uses' => 'NewsController@show']);
     });
 
     Route::group([
-        'prefix' => '/frontend/contact',
-        'as' => 'frontend.contact.',
-        'namespace' => 'Frontend'
-    ], function(){
+        'prefix' => 'contact',
+        'as' => 'contact.',
+    ], function () {
         Route::get('', ['as' => 'index', 'uses' => 'ContactController@index']);
     });
-
-    Route::group(['prefix' => '/admin/feedback', 'as' => 'admin.feedback.', 'namespace' => 'Admin'], function() {
-        Route::get('/', ['as' => 'index', 'uses' => 'FeedBackController@index']);
-    });
-
-
-
-
-
 });
 
 
@@ -93,8 +96,3 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ['role:admin']], function() {
-    Route::get('/admin', function(){
-        return view('layouts.admin');
-    });
-});

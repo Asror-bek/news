@@ -29,7 +29,7 @@
                         </div>
                         @endif
 
-                    <form method="post" action="{{ route('user.feedback.saveFeedBack')}}">
+                    <form method="post" action="{{ route('frontend.user.feedback.saveFeedBack')}}">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-12">

@@ -3,29 +3,35 @@
 namespace App\Services\Admin;
 
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CategoryService
 {
-    public function fetchAllWithPaginate()
+    /**
+     * Bu funksiya categoriyalarni olib beradi
+     * @return Builder[]|Collection
+     */
+    public function fetchAll()
     {
+
         return Category::query()->get();
     }
 
+    /**
+     * Yangi kategoriya yaratadi
+     * @param array $validated
+     * @return Builder|Model
+     */
     public function createNewCategory(array $validated)
     {
-        $category = new Category();
-        $category->Name = $validated['Name'];
-        $category->Description = $validated['Description'];
-        $category->save();
-        return $category;
+        return Category::query()->create($validated);
     }
 
     public function updateExistingCategory(array $validated, Category $category)
     {
-        $category->Name = $validated['Name'];
-        $category->Description = $validated['Description'];
-        $category->save();
-        return $category;
+        return tap($category)->update($validated);
     }
 
     public function deleteCategory(Category $category)
@@ -33,7 +39,6 @@ class CategoryService
         $category->delete();
     }
 }
-
 
 
 ?>
